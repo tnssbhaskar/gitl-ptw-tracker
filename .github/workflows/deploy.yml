@@ -7,10 +7,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_TOKEN }}
-          channelId: live
-          projectId: gitl-ptw-live-tracking
+      - uses: actions/checkout@v4
+      - name: Deploy to Firebase
+        run: npx firebase-tools@latest deploy --token "${{ secrets.FIREBASE_TOKEN }}" --non-interactive
